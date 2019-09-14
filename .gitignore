@@ -1,0 +1,26 @@
+# do not track these folders
+sample-data/
+data/
+demo/
+#notebooks/
+#images/
+#models/
+#pickles/
+storage/
+__pycache__/
+.ipynb_checkpoints/
+.keys/
+
+# do not track these files
+#__init__.py # track for modules
+*.sh
+*.txt
+*.csv
+.DS_Store
+
+# compiled source
+*.pyc
+
+# archives
+*.gz
+*.tar
