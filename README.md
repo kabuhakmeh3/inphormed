@@ -1,5 +1,12 @@
 # inPhormed
 
+**To-do list**
+
++ re-train & evaluate nlp models
++ try oversampling
++ try synthetic/augmented data for null class
++ deploy on flask & aws
+
 Still considering other names
 
 Highlight key parts of EULA/App Docs/Website agreements, etc
