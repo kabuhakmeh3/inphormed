@@ -48,18 +48,24 @@ def main(url='http://www.seriously.com/privacy-notice/'):
     seriously_policy = get_html_from_url(url)
     seriously_sentences = get_sentences_from_html(seriously_policy)
 
+    models= ['Contact_E_Mail_Address_1stParty','Location_1stParty',
+             'Identifier_Cookie_or_similar_Tech_3rdParty',
+             'Contact_Phone_Number_1stParty','SSO']
     # load models
     #pickle_jar = '../../pickles/'
-    pickle_jar = '/Users/Khaldoon/Dropbox/insight/inphormed/pickles/'
-    vectorizer = pickle.load(open(os.path.join(pickle_jar,'cv_dummy.pckl'), 'rb'))
-    classifier = pickle.load(open(os.path.join(pickle_jar,'clf_dummy.pckl'), 'rb'))
+    #pickle_jar = '/Users/Khaldoon/Dropbox/insight/inphormed/pickles/'
+    pickle_jar = '/Users/Khaldoon/Dropbox/insight/inphormed/pickles/models/augmented'
+    pol_result = {}
+    for model in models:
+        vectorizer = pickle.load(open(os.path.join(pickle_jar,'bow_'+model+'.pckl'), 'rb'))
+        classifier = pickle.load(open(os.path.join(pickle_jar,'lr_'+model+'.pckl'), 'rb'))
 
-    # transform & classify html
-    X_oos = vectorizer.transform(seriously_sentences)
-    y_oos_pred = classifier.predict(X_oos)
-    #print(y_oos_pred)
-    pol_result = policy_violated(y_oos_pred)
-    #print(pol_result)
+        # transform & classify html
+        X_oos = vectorizer.transform(seriously_sentences)
+        y_oos_pred = classifier.predict(X_oos)
+        #print(y_oos_pred)
+        pol_result[model] = policy_violated(y_oos_pred)
+        #print(pol_result)
     return pol_result
 
 if __name__ == '__main__':

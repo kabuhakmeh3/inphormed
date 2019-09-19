@@ -14,9 +14,19 @@ def index():
 def my_form_post():
     url = request.form['url']
     violated = policy_pull.main(url=url)
-    if violated:
-        result = 'VIOLATES'
-    else:
-        result = 'does not violate'
+
+    policies = {'Contact_E_Mail_Address_1stParty':'email',
+                'Location_1stParty':'location',
+                'Identifier_Cookie_or_similar_Tech_3rdParty':'cookies',
+                'Contact_Phone_Number_1stParty':'phone',
+                'SSO':'sso'}
+    result = {}
+    for pol in policies:
+        if violated:
+            tmp = 'VIOLATES'
+        else:
+            tmp = 'does not violate'
+        result[policies[pol]] = tmp
+
     return render_template('result.html',
                             policy=result)
