@@ -8,10 +8,14 @@ from inphormed import policy_pull
 def index():
     user = {'nickname':'inPhormed',
             'url':'http://www.seriously.com/privacy-notice/'}
-    return render_template("index.html", title = 'Home', user=user)
+    return render_template('index.html', title = 'Home', user=user)
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 @app.route('/', methods=['POST'])
-def my_form_post():
+def result():
     url = request.form['url']
     violated = policy_pull.main(url=url)
 

@@ -1,17 +1,23 @@
+<!DOCTYPE html>
 <html>
     <head>
         <title>result - inphormed</title>
     </head>
     <body>
-        <h1>inPhormed</h1>
-        This app {{policy.email}} email address policy.
-        <br>
-        This app {{policy.location}} location policy.
-        <br>
-        This app {{policy.cookies}} 3rd party cookie policy.
-        <br>
-        This app {{policy.phone}} phone number policy.
-        <br>
-        This app {{policy.sso}} SSO policy.
+        {% extends "layout.html" %}
+        {% block content %}
+            <div class="result">
+                <h1>Policy Summary</h1>
+                This app {{policy.email}} email address policy.
+                <br>
+                This app {{policy.location}} location policy.
+                <br>
+                This app {{policy.cookies}} 3rd party cookie policy.
+                <br>
+                This app {{policy.phone}} phone number policy.
+                <br>
+                This app {{policy.sso}} SSO policy.
+            </div>
+        {% endblock %}
     </body>
 </html>
