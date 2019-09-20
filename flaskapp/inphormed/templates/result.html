@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html>
     <head>
+      <style>
+      ul.a {
+        list-style-type: circle;
+      }
+      </style>
         <title>result - inphormed</title>
     </head>
     <body>
         {% extends "layout.html" %}
         {% block content %}
             <div class="result">
-                <h1>Policy Summary</h1>
-                This app {{policy.email}} email address policy.
-                <br>
-                This app {{policy.location}} location policy.
-                <br>
-                This app {{policy.cookies}} 3rd party cookie policy.
-                <br>
-                This app {{policy.phone}} phone number policy.
-                <br>
-                This app {{policy.sso}} SSO policy.
+              <h1>Policy Summary</h1>
+              <u1 class="a">
+                <li>This app {{policy.email}} email address policy</li>
+                <li>This app {{policy.location}} location policy</li>
+                <li>This app {{policy.cookies}} 3rd party cookie policy</li>
+                <li>This app {{policy.phone}} phone number policy</li>
+                <li>This app {{policy.sso}} SSO policy</li>
+              </u1>
             </div>
         {% endblock %}
     </body>
