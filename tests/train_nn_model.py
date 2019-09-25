@@ -72,7 +72,7 @@ def main():
     print('unigram & bigram model')
     vectorizer = CountVectorizer(ngram_range=(1,2)) # (1,1), (1,2), (2,2)
     X_train_counts = vectorizer.fit_transform(X_train)
-    X_test_counts = vectorizer.fit(X_test)
+    X_test_counts = vectorizer.transform(X_test)
     
     y_train_np = np.array(y_train)
 
@@ -87,8 +87,10 @@ def main():
     
     # save model
     nn_model_path = '../pickles/nn_models/'
-    pickle.dump(open(os.path.join(nn_model_path,'bigram_vectorizer.pckl'),'wb'))
-    nn.save(os.path.join(nn_model_path,'nn_model_bigrams.h5'))
+    #pickle.dump(open(os.path.join(nn_model_path,'bigram_vectorizer.pckl'),'wb'))
+    with open(os.path.join(nn_model_path,'vectorizer_uni_bigram.pckl'), 'wb') as p:
+        pickle.dump(vectorizer, p, protocol=pickle.HIGHEST_PROTOCOL)
+    nn.save(os.path.join(nn_model_path,'nn_model_uni_bigrams.h5'))
 
     # predict/test model
     y_predicted = nn.predict(X_test_counts.toarray())
