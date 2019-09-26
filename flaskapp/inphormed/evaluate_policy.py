@@ -8,6 +8,7 @@ import os, pickle, urllib
 import pandas as pd
 from bs4 import BeautifulSoup
 from keras.models import load_model
+from keras import backend as K
 
 
 def standardize_text(df, text_field):
@@ -62,6 +63,24 @@ def get_sentences_from_html(html):
 
     return sentences
 
+def get_policy_action(policy):
+    '''
+    Parse Policies returned by NN classifier
+    Return:
+    + Policy name
+    + Action
+    '''
+    perf = '_PERFORMED'
+    not_perf = '_NOT_PERFORMED'
+    if policy.endswith(not_perf):
+        policy_name = policy[:-len(not_perf)].replace('_',' ')
+        policy_action = 'Not Performed'
+    else:
+        policy_name = policy[:-len(perf)].replace('_',' ')
+        policy_action = 'Performed'
+
+    return policy_name, policy_action
+
 model_files = {
         # format
         # model : [vectorizer, neural net]
@@ -78,19 +97,24 @@ model_files = {
                    'nn_model_tfidf_uni_bi_min_5_max_10k.h5']
         }
 
-def main(url='https://www.snap.com/en-US/privacy/privacy-policy', model_name='base'):
-#def main(url='http://www.seriously.com/privacy-notice/', model_name='tfidf'):
+#def main(url='https://www.snap.com/en-US/privacy/privacy-policy', model_name='base'):
+def main(url='http://www.seriously.com/privacy-notice/', model_name='reduced_feats'):
     
+    # refresh session
+    K.clear_session()
+
     # start 
-    print('-------------------------------')
-    print('Evaluating '+ model_name.upper())
+    #print('-------------------------------')
+    #print('Evaluating '+ model_name.upper())
     
     # get html stuff
     seriously_policy = get_html_from_url(url)
     seriously_sentences = get_sentences_from_html(seriously_policy)
 
     # load models
-    pickle_jar = '../pickles/nn_models/'
+    base_path = '/Users/Khaldoon/Dropbox/insight/inphormed/'
+    pickle_path = 'pickles/nn_models/'
+    pickle_jar = base_path + pickle_path
     vectorizer = pickle.load(open(os.path.join(pickle_jar,model_files[model_name][0]), 'rb'))
     nn_model = load_model(os.path.join(pickle_jar,model_files[model_name][1]))
     #vectorizer = pickle.load(open(os.path.join(pickle_jar,'count_vec_for_nn.pckl'), 'rb'))
@@ -106,13 +130,15 @@ def main(url='https://www.snap.com/en-US/privacy/privacy-policy', model_name='ba
     y_oos_pred = nn_model.predict(X_oos.toarray())
     practiced_policies = sum(y_oos_pred>0.5)
     
+    result = {}
     for pol in policy_indices:
         if practiced_policies[policy_indices[pol]] > 0:
-            print(pol)
-    
+            pol_name, pol_action = get_policy_action(pol)
+            result[pol_name] = pol_action
+
     #pol_result = policy_violated(y_oos_pred)
-    #print(pol_result)
-    #return pol_result
+    #print(result)
+    return result
 
 if __name__ == '__main__':
     main()
