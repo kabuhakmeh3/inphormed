@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <style>
-      ul.a {
-        list-style-type: circle;
-      }
+      <style> 
+            table { 
+                border-collapse: collapse; 
+            } 
+            th { 
+                background-color:green; 
+                Color:white; 
+            } 
+            th, td { 
+                padding:10px 
+              
+            } 
+            h1 { 
+                color:black; 
+            } 
       </style>
+    <script>
+    function showSentence() {
+        document.getElementById("sentences").innerHTML = 
+            "These sentences contain language of concern";
+    }
+    </script>
         <title>result - inphormed</title>
     </head>
     <body>
@@ -17,14 +34,18 @@
             {% for key, value in policy.items() %}
             <TR>
             <!-- red x - &#10060; / green check - &#9989;-->
-                <!--TD class="c1">&#10060;</TD-->
-                <!--TD class="c2">{{key}} is {{value}}</TD-->
+                <!--TD onclick="showSentence()"
+                    class="c1">{{value.icon|safe}}</TD-->
                 <TD class="c1">{{value.icon|safe}}</TD>
-                <TD class="c2">{{key}} is {{value.modality}}</TD>
+                <TD class="c2", onclick="showSentence()">{{key}} is {{value.modality}}</TD>
+                <!--TD class="c3">{{value.sentences}}</TD-->
+                <!--TD class="c3">{{value.sentences}}</TD-->
             </TR>
+            <!--p>some nonsense</p-->
             {% endfor %}
             </table>
             </div>
+            <p id="sentences"></p>
         {% endblock %}
     </body>
 </html>
