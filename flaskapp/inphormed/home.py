@@ -4,10 +4,11 @@ from inphormed import app
 #from inphormed import evaluate_policy
 import pickle
 from inphormed import evaluate_policy_dynamic
+from inphormed import summarize_policy
 
 #list_file = 'policy_list.pckl'
-#list_file = 'policy_list_ord_all.pckl'
-list_file = 'policy_list_ord_top.pckl'
+list_file = 'policy_list_ord_all.pckl'
+#list_file = 'policy_list_ord_top.pckl' # top 20
 policy_tmp = pickle.load(open('inphormed/static/pickles/'+list_file,'rb'))
 policy_list = [p.replace('_',' ') for p in policy_tmp]
 
@@ -51,9 +52,28 @@ def result():
         else:
             tmp_dict = {}
             tmp_dict['modality'] = 'Not Mentioned'
-            tmp_dict['sentences'] = ['This practice is not explicitly mentioned in the policy']
+            #tmp_dict['sentences'] = ['This practice is not explicitly mentioned in the policy']
+            tmp_dict['sentences'] = None
             tmp_dict['icon'] = icons['Not Mentioned']
             result[pol] = tmp_dict
 
-    return render_template('result.html',
-                            policy=result)
+    # this is new
+    #result = summarize_policy.main(all_policies=result)
+    result = summarize_policy.get_type(all_policies=result)
+
+    summarized_result = summarize_policy.summarize(result)
+
+    clean_result = {}
+    for prac in result:
+        tmp = {}
+        if result[prac]['sentences']:
+            raw_sentences = result[prac]['sentences']
+            #clean_sentences = '\n'.join(s for s in raw_sentences)
+            #tmp['sentences'] = clean_sentences
+            tmp['sentences'] =  '\n'.join(s for s in raw_sentences)
+            tmp['modality'] = result[prac]['modality']
+            clean_result[prac] = tmp
+    #result = summarized_result
+
+    return render_template('result.html', policy=clean_result,
+                            summary=summarized_result)

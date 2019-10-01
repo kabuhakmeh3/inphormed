@@ -1,8 +1,8 @@
 <html>
     <head>
-        <title>{{title}} - inphormed</title>
+        <title>{{title}} |  inphormed</title>
     </head>
-    <style> 
+    <style>
         input[type=button], input[type=submit], input[type=reset] {
             background-color: #A4C639;
             border: none;
@@ -34,10 +34,22 @@
                 Which app policy do you want to scan?
                 <br>
                 <form method="POST">
-                    <input name="url" size=40, type="text" 
+                    <input name="url" size=40, type="text"
                     placeholder="Enter a privacy policy url...">
                     <input type="submit">
                 </form>
+                <!-- add a guide here -->
+                <br>
+                <h1>Policy Overview</h1>
+                Types of data commonly acessed by Apps
+                <ul>
+                  <li>Contact Information & Contact Lists</li>
+                  <li>Demographics</li>
+                  <li>Location (GPS, WiFi)</li>
+                  <li>Identifier (device ID, IP)</li>
+                  <li>Single Sign-On (Facebook)</li>
+                </ul>
+                <!-- end guide -->
             </div>
         {% endblock %}
     </body>

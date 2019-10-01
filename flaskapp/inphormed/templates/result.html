@@ -1,51 +1,105 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <style> 
-            table { 
-                border-collapse: collapse; 
-            } 
-            th { 
-                background-color:green; 
-                Color:white; 
-            } 
-            th, td { 
-                padding:10px 
-              
-            } 
-            h1 { 
-                color:black; 
-            } 
+      <style>
+            table {
+                border-collapse: collapse;
+            }
+            th {
+                background-color:#a4c639;
+                Color:white;
+            }
+            th, td {
+                padding:10px
+
+            }
+            h1 {
+                color:black;
+            }
+            .hide{
+              display:none;
+            }
+            /* split table */
+            * {
+              box-sizing: border-box;
+            }
+
+            .row {
+              display: flex;
+            }
+
+            /* Create two equal columns that sits next to each other */
+            .column {
+              flex: 50%;
+              padding: 10px;
+            }
+            .scroll_column {
+              flex: 50%;
+              padding: 10px;
+              height: 500px;
+              overflow: scroll;
+            }
       </style>
     <script>
     function showSentence() {
-        document.getElementById("sentences").innerHTML = 
+        document.getElementById("sentences").innerHTML =
             "These sentences contain language of concern";
     }
+    function showHidden() {
+        document.getElementId("hide").style.display = "block";
+    }
     </script>
-        <title>result - inphormed</title>
+        <title>Policy Scan Result |  inphormed</title>
     </head>
     <body>
         {% extends "layout.html" %}
         {% block content %}
             <div class="result">
             <h1>Policy Summary</h1>
+            <div class="row">
+              <div class="column" style="background-color:#fff;">
+            <!--h1>Data Practices Found</h1-->
             <table>
-            {% for key, value in policy.items() %}
+            <tr>
+            <th></th>
+            <th>Policy Type</th>
+            <th>Practiced</th>
+            <th>Not Practiced</th>
+            <th>Not Mentioned</th>
+            </tr>
+            {% for key, value in summary.items() %}
             <TR>
-            <!-- red x - &#10060; / green check - &#9989;-->
-                <!--TD onclick="showSentence()"
-                    class="c1">{{value.icon|safe}}</TD-->
-                <TD class="c1">{{value.icon|safe}}</TD>
-                <TD class="c2", onclick="showSentence()">{{key}} is {{value.modality}}</TD>
-                <!--TD class="c3">{{value.sentences}}</TD-->
+                <TD class="c1" style="font-size:50px">{{value.icon|safe}}</TD>
+                <TD class="c2"><b>{{key}}</b></TD>
+                <TD class="c3">{{value.practiced}}</TD>
+                <TD class="c4">{{value.notpracticed}}</TD>
+                <TD class="c5">{{value.notmentioned}}</TD>
+                <!--TD class="c2", onclick="showHidden()">{{key}} is {{value.modality}}</TD-->
+                <!--LATEST ATTEMPT NOT WORKING TD class="hide", id="hide">{{value.sentences}}</TD-->
                 <!--TD class="c3">{{value.sentences}}</TD-->
             </TR>
             <!--p>some nonsense</p-->
             {% endfor %}
             </table>
+          </div>
+            <div class="scroll_column" style="background-color:rgba(64.3%,77.6%,22.4%, 0.5);">
+            <!--div class="column" style="background-color:#a4c639;"-->
+              <h1>Specific Policies</h1>
+              <table>
+              {% for key, value in policy.items() %}
+              <TR>
+                <TD class="c3"><b>{{key}} -- {{value.modality}}</b></TD>
+              </TR>
+              <TR>
+                <TD class="c4">{{value.sentences}}</TD>
+              </TR>
+              <!--p>some nonsense</p-->
+              {% endfor %}
+              </table>
             </div>
-            <p id="sentences"></p>
+            </div>
+            </div>
+            <!--p id="sentences"></p--><!-- this shows on click but not what i want-->
         {% endblock %}
     </body>
 </html>
