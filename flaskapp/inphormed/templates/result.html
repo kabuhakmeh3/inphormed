@@ -29,12 +29,13 @@
             }
 
             /* Create two equal columns that sits next to each other */
-            .column {
+            .left_column {
               flex: 50%;
               padding: 10px;
             }
-            .scroll_column {
+            .right_column {
               flex: 50%;
+              background-color:rgba(64.3%,77.6%,22.4%, 0.5);
               padding: 10px;
               height: 500px;
               overflow: scroll;
@@ -57,23 +58,23 @@
             <div class="result">
             <h1>Policy Summary</h1>
             <div class="row">
-              <div class="column" style="background-color:#fff;">
+              <div class="left_column" style="background-color:#fff;">
             <!--h1>Data Practices Found</h1-->
             <table>
             <tr>
             <th></th>
-            <th>Policy Type</th>
-            <th>Practiced</th>
-            <th>Not Practiced</th>
-            <th>Not Mentioned</th>
+            <th style="font-size:16px">Data Type</th>
+            <th style="font-size:16px">Practiced</th>
+            <th style="font-size:16px">Not Practiced</th>
+            <th style="font-size:16px">Not Mentioned</th>
             </tr>
             {% for key, value in summary.items() %}
             <TR>
-                <TD class="c1" style="font-size:50px">{{value.icon|safe}}</TD>
-                <TD class="c2"><b>{{key}}</b></TD>
-                <TD class="c3">{{value.practiced}}</TD>
-                <TD class="c4">{{value.notpracticed}}</TD>
-                <TD class="c5">{{value.notmentioned}}</TD>
+                <TD class="c1" style="font-size:35px">{{value.icon|safe}}</TD>
+                <TD class="c2" style="font-size:20px">{{key}}</TD>
+                <TD class="c3" style="font-size:20px">{{value.practiced}}</TD>
+                <TD class="c4" style="font-size:20px">{{value.notpracticed}}</TD>
+                <TD class="c5" style="font-size:20px">{{value.notmentioned}}</TD>
                 <!--TD class="c2", onclick="showHidden()">{{key}} is {{value.modality}}</TD-->
                 <!--LATEST ATTEMPT NOT WORKING TD class="hide", id="hide">{{value.sentences}}</TD-->
                 <!--TD class="c3">{{value.sentences}}</TD-->
@@ -81,8 +82,16 @@
             <!--p>some nonsense</p-->
             {% endfor %}
             </table>
+            <br>
+            Guide to understanding user policy contents
+            <ul>
+              <li>&#9989; Data Practice is Not Performed by App -- you're safe!</li>
+              <li>&#10060; Data Practice is Performed by App -- make sure you trust this company</li>
+              <li>&#128679; Data Practice is not specifically mentioned in user policy -- proceed with caution</li>
+            </ul>
           </div>
-            <div class="scroll_column" style="background-color:rgba(64.3%,77.6%,22.4%, 0.5);">
+            <!--div class="scroll_column" style="background-color:rgba(64.3%,77.6%,22.4%, 0.5);"-->
+            <div class="right_column">
             <!--div class="column" style="background-color:#a4c639;"-->
               <h1>Specific Policies</h1>
               <table>

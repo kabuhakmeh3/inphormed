@@ -1,6 +1,22 @@
 <html>
     <head>
         <title>{{title}} |  inphormed</title>
+        <style>
+        .row {
+          display: flex;
+        }
+        .left_column {
+          flex: 50%;
+          padding: 10px;
+        }
+        .right_column {
+          flex: 50%;
+          background-color:rgba(64.3%,77.6%,22.4%, 0.5);
+          padding: 10px;
+          height: 500px;
+          overflow: scroll;
+        }
+        </style>
     </head>
     <style>
         input[type=button], input[type=submit], input[type=reset] {
@@ -43,11 +59,11 @@
                 <h1>Policy Overview</h1>
                 Types of data commonly acessed by Apps
                 <ul>
-                  <li>Contact Information & Contact Lists</li>
-                  <li>Demographics</li>
-                  <li>Location (GPS, WiFi)</li>
-                  <li>Identifier (device ID, IP)</li>
-                  <li>Single Sign-On (Facebook)</li>
+                  <li><b>Contact</b> - Phone, Email, Addres Book, Mailing, etc.</li>
+                  <li><b>Demographic</b> - Age, Gender</li>
+                  <li><b>Location</b> - GPS, WiFi, Bluetooth, Cell Tower</li>
+                  <li><b>Identifier</b> - Cookies, IP Address, IMEI, SIM Serial</li>
+                  <li><b>Single Sign-On</b> - Facebook, Other websites</li>
                 </ul>
                 <!-- end guide -->
             </div>

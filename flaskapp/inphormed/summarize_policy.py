@@ -3,14 +3,14 @@
 # PICKLE THIS (too messy)
 policy_dict = {
         'Contact':['Contact E Mail Address 1stParty',
-        'Contact Phone Number 1stParty','Contact Postal Address 1stParty',
-        'Contact Address Book 1stParty','Contact Password 1stParty',
-        'Contact E Mail Address 3rdParty','Contact 1stParty',
-        'Contact Postal Address 3rdParty','Contact ZIP 1stParty',
-        'Contact Phone Number 3rdParty','Contact City 1stParty',
-        'Contact Password 3rdParty','Contact ZIP 3rdParty',
-        'Contact 3rdParty','Contact City 3rdParty',
-        'Contact Address Book 3rdParty'],
+                   'Contact Phone Number 1stParty','Contact Postal Address 1stParty',
+                   'Contact Address Book 1stParty','Contact Password 1stParty',
+                   'Contact E Mail Address 3rdParty','Contact 1stParty',
+                   'Contact Postal Address 3rdParty','Contact ZIP 1stParty',
+                   'Contact Phone Number 3rdParty','Contact City 1stParty',
+                   'Contact Password 3rdParty','Contact ZIP 3rdParty',
+                   'Contact 3rdParty','Contact City 3rdParty',
+                   'Contact Address Book 3rdParty'],
 
         'Demographic':['Demographic 3rdParty', 'Demographic Age 3rdParty',
                        'Demographic Age 1stParty', 'Demographic 1stParty',
