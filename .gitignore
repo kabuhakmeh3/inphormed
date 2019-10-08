@@ -16,6 +16,8 @@ __pycache__/
 
 # do not track these files
 #__init__.py # track for modules
+*.h5
+*.pckl
 *.sh
 *.txt
 *.csv
@@ -23,6 +25,7 @@ __pycache__/
 
 # compiled source
 *.pyc
+*.swp
 
 # archives
 *.gz
